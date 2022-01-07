@@ -1,0 +1,73 @@
+﻿@page 
+@model Web_AVA_Proiect.Pages.Programari.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a style="color:lightseagreen; font-weight:bold;" asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Programare[0].Ora_Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Programare[0].Angajat.Nume)
+                Si
+                @Html.DisplayNameFor(model => model.Programare[0].Angajat.Prenume) Angajat
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Programare[0].Sala.Strada)
+                Si
+                @Html.DisplayNameFor(model => model.Programare[0].Sala.Numar)
+                Sala
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Programare[0].TipMasaj)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ProgramareD.Programari)
+        {
+            string selectedRow = "";
+            if (item.ID == Model.ProgramareID)
+            {
+                selectedRow = "table-success";
+            }
+        <tr class="@selectedRow">
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Ora_Data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Angajat.Nume)
+                @Html.DisplayFor(modelItem => item.Angajat.Prenume)
+            </td>
+            <td>
+                Strada: @Html.DisplayFor(modelItem => item.Sala.Strada), <br />
+                Numar Sala: @Html.DisplayFor(modelItem => item.Sala.Numar) 
+            </td>
+            <td>
+                @{
+                    foreach (var masaj in item.TipMasaj)
+                    {
+                        @: @masaj.Masaj.Denumire,<br /> @masaj.Masaj.Durata minute, <br /> @masaj.Masaj.Pret lei <br />
+                    }
+                }
+            </td>
+            <td>
+                <a style="color:lightseagreen; font-weight:bold;" asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a style="color:lightseagreen; font-weight:bold;" asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a style="color:lightseagreen; font-weight:bold;" asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

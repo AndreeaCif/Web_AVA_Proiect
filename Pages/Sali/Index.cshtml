@@ -1,0 +1,48 @@
+﻿@page
+@model Web_AVA_Proiect.Pages.Sali.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a style="color:lightseagreen; font-weight:bold" asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Sala[0].Numar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sala[0].Etaj)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sala[0].Strada)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Sala) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Numar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Etaj)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Strada)
+            </td>
+            <td>
+                <a style="color:lightseagreen; font-weight:bold" asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a style="color:lightseagreen; font-weight:bold" asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a style="color:lightseagreen; font-weight:bold" asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

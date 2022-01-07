@@ -1,0 +1,33 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Centrul de terapie si masaj <span style="color:lightseagreen; font-weight:500;">AVA</span></h1>
+    <br />
+    <img class="masaj" src="~/Images/masaj.jpg" />
+    <br /> <br />
+    <h5 style="margin:10px 5px 5px 5px;">Corpul tau merita ce e mai bun, de aceea te invit in mica mea oaza de relaxare pentru a beneficia de masaje si tratamente corporale special gandite pentru tine</h5>
+    <br />
+    <h4>Acum este momentul potrivit sa-ti faci o <a class="programare" asp-page="./Programari/Index"> <span style="color:lightseagreen; font-weight:700; font-size:30px;">programare</span></a> </h4>
+    <br />
+</div>
+<div class="despre">
+    <table>
+        <tr>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                <p style="font-size:18px; font-weight:500; text-align:center;">
+                    <span style="color:lightseagreen; font-weight:700;"> Centrul de Terapie și Masaj AVA</span> îți oferă terapii, tratamente și servicii de masaj de la clasicele masaje de relaxare,pana la drenaj limfatic, masaj terapeutic, masaj anticelulitic cu bambus si masaj Thai.
+                </p>
+            </td>
+            <td><img src="~/Images/masaj-anticelulitic-cu-bete-de-bambus.jpg" height="400" /></td>
+        </tr>
+    </table>
+
+</div>

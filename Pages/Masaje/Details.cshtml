@@ -1,0 +1,37 @@
+﻿@page
+@model Web_AVA_Proiect.Pages.Masaje.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Masaj</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Masaj.Denumire)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Masaj.Denumire)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Masaj.Pret)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Masaj.Pret)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Masaj.Durata)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Masaj.Durata)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a style="color:lightseagreen; font-weight:bold" asp-page="./Edit" asp-route-id="@Model.Masaj.ID">Edit</a> |
+    <a style="color:lightseagreen; font-weight:bold" asp-page="./Index">Back to List</a>
+</div>

@@ -1,0 +1,70 @@
+﻿@page
+@model Web_AVA_Proiect.Pages.Programari.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Programare</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label style="color:lightseagreen; font-weight:500;" asp-for="Programare.Ora_Data" class="control-label"></label>
+                <input asp-for="Programare.Ora_Data" class="form-control" />
+                <span asp-validation-for="Programare.Ora_Data" class="text-danger"></span>
+
+                <label style="color:lightseagreen; font-weight:500;" asp-for="Programare.AngajatID" class="control-label">Nume angajat si prenume angajat</label>
+                <select asp-for="Programare.AngajatID" class="form-control" asp-items="ViewBag.AngajatID">
+                </select>
+                <span asp-validation-for="Programare.AngajatID" class="text-danger"></span>
+
+                <label style="color:lightseagreen; font-weight:500;" asp-for="Programare.SalaID" class="control-label">Strada si numar sala</label>
+                <select asp-for="Programare.SalaID" class="form-control" asp-items="ViewBag.SalaID">
+                </select>
+                <span asp-validation-for="Programare.SalaID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+               <h6 style="color:lightseagreen"> Tipuri masaj </h6>
+                <div class="table">
+                    <table>
+                        <tr>
+                            @{
+                                int cnt = 0;
+                                foreach (var mas in Model.CategorieMasajAsignataList)
+                                {
+                                    if (cnt++ % 2 == 0)
+                                    {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="radio"
+                                               name="selectedCategories"
+                                               value="@mas.MasajID"
+                                               @(Html.Raw(mas.Asignata ? "checked=\"checked\"" : "")) />
+                                        @mas.MasajID @: @mas.Denumire,  @mas.Durata minute, @mas.Pret lei 
+                                    @:</td>
+                                }
+                            @:</tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+    </div>
+</div>
+
+<div>
+    <a style="color:lightseagreen; font-weight:bold;" asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
