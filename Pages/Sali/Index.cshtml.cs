@@ -19,11 +19,19 @@ namespace Web_AVA_Proiect.Pages.Sali
             _context = context;
         }
 
+        public string CurrentFilter { get; set; }
         public IList<Sala> Sala { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string searchString)
         {
-            Sala = await _context.Sala.ToListAsync();
+            CurrentFilter = searchString;
+            IQueryable<Sala> sala = from s in _context.Sala select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                sala = sala.Where(s => s.Strada.Contains(searchString));
+                                       
+            }
+            Sala = await sala.AsNoTracking().ToListAsync();
         }
     }
 }

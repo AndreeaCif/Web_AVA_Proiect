@@ -10,11 +10,26 @@
 <p>
     <a style="color:lightseagreen; font-weight:bold" asp-page="Create">Create New</a>
 </p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Cauta dupa nume sau prenume: <br />
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a style="color:lightseagreen;" asp-page="./Index">Inapoi la lista completa</a>
+        </p>
+    </div>
+</form>
+
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Angajat[0].Nume)
+                <a style="color:black;" asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
+                    @Html.DisplayNameFor(model => model.Angajat[0].Nume)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Angajat[0].Prenume)
@@ -29,26 +44,27 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Angajat) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nume)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prenume)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nr_telefon)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Salariu)
-            </td>
-            <td>
-                <a style="color:lightseagreen; font-weight:bold" asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a style="color:lightseagreen; font-weight:bold" asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a style="color:lightseagreen; font-weight:bold" asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Angajat)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nume)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prenume)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nr_telefon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salariu)
+                </td>
+                <td>
+                    <a style="color:lightseagreen; font-weight:bold" asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a style="color:lightseagreen; font-weight:bold" asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    <a style="color:lightseagreen; font-weight:bold" asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

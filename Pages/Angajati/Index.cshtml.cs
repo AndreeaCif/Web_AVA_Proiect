@@ -18,12 +18,37 @@ namespace Web_AVA_Proiect.Pages.Angajati
         {
             _context = context;
         }
-
+        public string NameSort { get; set; }
+        public string CurrentFilter { get; set; }
         public IList<Angajat> Angajat { get;set; }
+      
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string sortOrder, string searchString)
         {
-            Angajat = await _context.Angajat.ToListAsync();
+            NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            CurrentFilter = searchString;
+            
+            IQueryable<Angajat> angajat = from s in _context.Angajat
+                                          select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+               
+                angajat = angajat.Where(s => s.Nume.Contains(searchString)
+                                       || s.Prenume.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    angajat = angajat.OrderByDescending(s => s.Nume);
+                    break;
+                default:
+                    angajat = angajat.OrderBy(s => s.Nume);
+                    break;
+            }
+
+
+            //Angajat = await _context.Angajat.ToListAsync();
+            Angajat = await angajat.AsNoTracking().ToListAsync();
         }
     }
 }

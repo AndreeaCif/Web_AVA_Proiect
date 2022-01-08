@@ -14,7 +14,9 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Programare[0].Ora_Data)
+                <a style="color:black;" asp-page="./Index" asp-route-sortOrder="@Model.DateSort">
+                    @Html.DisplayNameFor(model => model.Programare[0].Ora_Data)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Programare[0].Angajat.Nume)

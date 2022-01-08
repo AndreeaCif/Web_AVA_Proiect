@@ -20,21 +20,36 @@ namespace Web_AVA_Proiect.Pages.Programari
         }
 
         public IList<Programare> Programare { get;set; }
-
         public ProgramareData ProgramareD { get; set; }
         public int ProgramareID { get; set; }
         public int MasajID { get; set; }
-        public async Task OnGetAsync(int? id, int? MasajID)
+        public string DateSort { get; set; }
+        public async Task OnGetAsync(int? id, int? MasajID, string sortOrder)
         {
+            
             ProgramareD = new ProgramareData();
 
-            ProgramareD.Programari = await _context.Programare
+            DateSort = sortOrder == "Date" ? "date_desc" : "Date";
+      
+            IQueryable<Programare> program = from s in _context.Programare select s;
+           
+            switch (sortOrder)
+            {
+                case "date_desc":
+                    program = program.OrderByDescending(s => s.Ora_Data);
+                    break;
+                default:
+                    program = program.OrderBy(s => s.Ora_Data);
+                    break;
+            }
+
+            ProgramareD.Programari = await program
             .Include(b => b.Angajat)
             .Include(b => b.Sala)
             .Include(b => b.TipMasaj)
             .ThenInclude(b => b.Masaj)
             .AsNoTracking()
-            .OrderBy(b => b.Ora_Data)
+            //.OrderBy(b=> b.Ora_Data)
             .ToListAsync();
             if (id != null)
             {

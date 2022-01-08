@@ -19,11 +19,18 @@ namespace Web_AVA_Proiect.Pages.Masaje
             _context = context;
         }
 
+        public string CurrentFilter { get; set; }
         public IList<Masaj> Masaj { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string searchString)
         {
-            Masaj = await _context.Masaj.ToListAsync();
+            CurrentFilter = searchString;
+            IQueryable<Masaj> masaj = from s in _context.Masaj select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                masaj = masaj.Where(s => s.Denumire.Contains(searchString));
+            }
+            Masaj = await masaj.AsNoTracking().ToListAsync();
         }
     }
 }
